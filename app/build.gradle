@@ -27,7 +27,7 @@ android {
 
     //2、配置数据库版本
     greendao {
-        schemaVersion 2  //数据库版本号，升级数据库需要修改版本号
+        schemaVersion 6  //数据库版本号，升级数据库需要修改版本号
         daoPackage 'com.gujun.greendao.gen'  //一般为app包名+生成文件的文件夹名
         targetGenDir 'src/main/java'  //自动生成的greendao代码存放路径
     }
@@ -42,5 +42,10 @@ dependencies {
 
     //3、数据库包
     implementation 'org.greenrobot:greendao:3.3.0' // add library
+    //数据库加密需要的库
+    implementation "net.zetetic:android-database-sqlcipher:4.4.2"
+
+    //4、数据库升级处理工具，适合GreenDao3.0以上
+    implementation 'io.github.yuweiguocn:GreenDaoUpgradeHelper:v2.2.1'
 
 }

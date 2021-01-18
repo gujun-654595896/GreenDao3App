@@ -15,8 +15,9 @@ object DbManager {
      * 在App启动时进行初始化
      */
     fun initDb(context: Context) {
-        val devOpenHelper = DaoMaster.DevOpenHelper(context, "test.db", null)
-        //使用加密可写的数据库
+        val devOpenHelper = MigrationOpenHelper(context, "test.db", null)
+        //使用加密可写的数据库,需要加入SQLCipher
+        //异常：org.greenrobot.greendao.DaoException: Using an encrypted database requires SQLCipher
         val mDaoMaster = DaoMaster(devOpenHelper.getEncryptedWritableDb(db_password))
         mDaoSession = mDaoMaster.newSession()
     }

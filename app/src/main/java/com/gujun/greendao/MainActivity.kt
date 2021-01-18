@@ -3,6 +3,7 @@ package com.gujun.greendao
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gujun.greendao.utils.DataDao
+import com.gujun.greendao.utils.DataTwoDao
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,23 +15,15 @@ class MainActivity : AppCompatActivity() {
 
         val data = DataBean()
         data.setId_(1)
-        data.setDesc("teset1")
+        data.setDesc("data")
+
+        val dataTwo = DataTwoBean()
+        dataTwo.setId_(1)
+        dataTwo.setDesc("data two")
+
         add.setOnClickListener {
             DataDao.getInstance().add(data)
-            updateUi()
-        }
-
-        delete.setOnClickListener {
-            DataDao.getInstance().deleteById(1)
-            updateUi()
-        }
-
-        val dataNew = DataBean()
-        dataNew.setId_(1)
-        dataNew.setDesc("teset----------")
-        update.setOnClickListener {
-            DataDao.getInstance().add(dataNew)
-            updateUi()
+            DataTwoDao.getInstance().add(dataTwo)
         }
     }
 
@@ -38,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         val list = DataDao.getInstance().queryAll()
         val stringBuilder = StringBuilder()
         list.forEach { stringBuilder.append(it.desc).append(",,") }
+        val list2 = DataTwoDao.getInstance().queryAll()
+        list2.forEach { stringBuilder.append(it.desc).append(",,") }
         content.text = stringBuilder
     }
 }
